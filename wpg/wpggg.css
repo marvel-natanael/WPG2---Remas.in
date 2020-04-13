@@ -1,0 +1,50 @@
+#sec1{
+	height: 100vh;
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
+
+body{
+	margin-top: 0px;
+	margin-left: 0px;
+	margin-bottom: 0px;
+	margin-right: 0px;
+}
+#beach{
+	width: 100px;
+	height: 25px;
+	background-image: url(img/pantai.jpeg);
+	margin-left: 90%;
+	
+}
+#forest{
+	width: 100px;
+	height: 25px;
+	background-image: url(img/futsal.jpg);
+	margin-left: 90%;
+}
+.semangka-box{
+	text-align: center;
+}
+
+.big-box{
+	text-align: center;
+}
+
+.left{
+	display:inline-block;
+}
+
+.center{
+	display:inline-block;
+	margin-left: 8%;
+}
+
+.right{
+	display:inline-block;
+	margin-left: 8%;
+}
+
+.set-mid-alignment{
+	text-align: center;
+}
