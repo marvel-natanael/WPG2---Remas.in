@@ -1,0 +1,174 @@
+<script>
+	function update(){
+		document.getElementById('text').value = clickcount;
+		
+		document.getElementById('amountmulti2').innerHTML = "x" + (multiplier + 1);
+		document.getElementById('costmulti').innerHTML = ((multiplier + 1)*1000) + " sampah";
+		document.getElementById('currentmulti').innerHTML = "Kamu Punya " + (multiplier) + " Pengolah B3";
+		
+		document.getElementById('amountautoclick').innerHTML = "Kamu Punya " + autoClick + " Pengolah sampah organik";
+		document.getElementById('costautoclick').innerHTML = ((autoClick + 1) *  12) + " sampah";
+		
+		document.getElementById('amountfarms').innerHTML = "Kamu Punya " + farms + " Pengolah sampah anorganik";
+		document.getElementById('costfarms').innerHTML = ((farms+1) * 150) + " sampah";
+		document.getElementById('sampahperdtk').innerHTML = "Kamu mengolah " + (((autoClick) + (farms*2))*multiplier) + " Sampah per detik";
+	
+	}
+	var multiplier = 1;
+	var clickcount = 0;
+	var autoClick = 0;
+	var farms = 0;
+	var beachbg= 0;
+	var parkbg = 0;
+	function timer(){
+		clickcount = clickcount + autoClick*multiplier;
+		clickcount = clickcount + farms * 2 *multiplier;
+		update()
+	}
+	setInterval(timer, 1000)
+</script>
+<html>
+	<head>
+		<title>Remas.in</title> 
+		<link rel = "stylesheet" type="text/css" href="wpggg.css">
+	</head>
+	
+	<section id = "sec1">
+	<body>
+		<p id="sampahperdtk">  Kamu mengolah 0 sampah per detik</p>
+		<p id="costbeach">Background cost : 10.000</p>
+		<button id = "beach" onclick="chgbeach()"> Pantai </button>
+		<button id = "park" onclick="chgpark()"> Taman </button>
+	
+			<div class="semangka-box">
+				
+				<div style="margin-bottom: 0.1%;">
+					<a href = # onclick="add()"><img src ="img\sampah.gif"></a>
+				</div>
+				
+				<div style="margin-bottom: 0.1%;">
+					<span>Kamu punya : </span> 
+					<input type="text" id="text" disabled style = text-align:center value = 0>
+					<span> Sampah</span>
+				</div>
+				<br>
+				<div>
+					<button" id = "save">
+						<a href="#"onclick="save()"><img src ="img\rsz_tombol_save.png"></a>
+					</button>
+					
+					<button" id = "load">
+						<a href="#"onclick="load()"><img src = "img\rsz_1tombol_load.png"></a>
+				</div>
+			
+			<script>
+				function add(){
+					clickcount = clickcount+1
+					update()
+	
+				}
+			</script>
+	
+			 <div class="big-box">
+				 <div class="left">
+					<p class="highlight">Beli 1 Pengolah Sampah Organik <br> +1 Sampah / detik</p>
+					<button">
+						<a href='#' onclick="buyautoclick()"><img src=hijau1.png> </a>
+					</button>
+					<p id="costautoclick" class="highlight">Clicks</p>
+					<p id="amountautoclick" class="highlight"> Kamu punya 0 pengolah sampah</p>
+				 </div>
+	
+				 <div class="center">
+					<p class="highlight">Beli 1 Pengolah Sampah Anorganik <br> +2 Sampah / detik</p>
+					<button">
+						<a href='#' onclick="buyfarm()"><img src=kuning1.png></a>
+					</button>
+					<p id="costfarms" class="highlight">15 clicks</p>
+					<p id="amountfarms" class="highlight"> Kamu punya 0 pengolah sampah</p>
+				 </div>
+	
+				 <div class="right">
+					<p id="amountmulti" class="highlight">Beli Pengolah Bahan Berbahaya dan Beracun <br> Sampah / detik x 2</p>
+					<button">
+						<a href="#" onclick="buymulti()"><span id="amountmulti2"> x 2</span> <img src=merah1.png></a>
+					</button>
+					<p id="costmulti" class="highlight"> 200 clicks</p>
+					 <p id="currentmulti" class="highlight"> Kamu Punya 1 Pengolah B3</p>
+				 </div>
+	
+			 </div>
+			</span>
+		</div>
+		
+
+		 <script>
+			 function save(){
+				  localStorage.setItem("clickcount", clickcount);
+				  localStorage.setItem("autoclick", autoClick);
+				  localStorage.setItem("farms", farms);
+				  localStorage.setItem("multiplier", multiplier);
+				  localStorage.setItem("beachbg", beachbg);
+				  localStorage.setItem("parkbg", parkbg);
+			 }
+			 function load(){
+				clickcount = localStorage.getItem("clickcount");
+				clickcount = parseInt(clickcount);
+				autoClick = localStorage.getItem("autoclick");
+				autoClick = parseInt(autoClick);
+				farms = localStorage.getItem("farms");
+				farms = parseInt(farms);
+				multiplier = localStorage.getItem("multiplier");
+				multiplier = parseInt(multiplier);
+				update()
+			 }
+			 function buyautoclick(){
+				 if(clickcount >= ((autoClick + 1) * 12)){
+					 clickcount = clickcount - ((autoClick + 1) * 12);
+					 autoClick = autoClick +1;
+					 update()
+				 }
+			 }
+			 function buyfarm(){
+				 if(clickcount >= ((farms+1) * 150)) {
+					 clickcount = clickcount -((farms + 1) * 150);
+					 farms=farms+1;
+					 update()
+				 }
+			 }
+			 function buymulti(){
+				 if(clickcount >= ((multiplier +1 ) * 1000)){
+				 clickcount = clickcount - ((multiplier + 1) * 1000);
+				 multiplier = multiplier + 1;
+				 update()
+				 }
+			 }
+			 function chgbeach(){
+				if (beachbg == 1){
+					document.getElementById('sec1').style.backgroundImage = "url(img/pantai.jpeg)";
+					update()
+				 }
+				else if (clickcount >= 1) {
+					clickcount = clickcount - 1;
+					document.getElementById('sec1').style.backgroundImage = "url(img/pantai.jpeg)";
+					beachbg = beachbg + 1;
+					update()
+				}	
+			 }
+			 function chgpark(){
+				if (parkbg == 1){
+					document.getElementById('sec1').style.backgroundImage = "url(img/tmn1.png)";
+					update()
+				 }
+				else if (clickcount >= 1) {
+					clickcount = clickcount - 1;
+					document.getElementById('sec1').style.backgroundImage = "url(img/tmn1.png)";
+					parkbg = parkbg + 1;
+					update()
+				}	
+			 }
+		 </script>
+	</body>
+	
+</section>
+</html>
